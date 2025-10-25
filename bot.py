@@ -74,3 +74,15 @@ def start_scheduler():
 # Run scheduler in background thread
 scheduler_thread = threading.Thread(target=start_scheduler, daemon=True)
 scheduler_thread.start()
+@app.route('/status')
+def status():
+    return jsonify({
+        "mode": "Simulation" if SIMULATION_MODE else "LIVE",
+        "tracked_coins": TRACKED_COINS,
+        "open_positions": open_positions,
+        "recent_logs": log_messages[-10:]
+    })
+
+@app.route('/log')
+def view_log():
+    return jsonify(log_messages[-50:])

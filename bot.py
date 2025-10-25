@@ -63,3 +63,14 @@ def run_trading_cycle():
 
         else:
             log(f"[{symbol}] HOLD — no clear signal")
+# ---- Scheduler ---- #
+def start_scheduler():
+    schedule.every(1).hours.do(run_trading_cycle)
+    log("⏱ Scheduler started — running every 1 hour")
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+# Run scheduler in background thread
+scheduler_thread = threading.Thread(target=start_scheduler, daemon=True)
+scheduler_thread.start()

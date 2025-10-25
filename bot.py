@@ -86,3 +86,16 @@ def status():
 @app.route('/log')
 def view_log():
     return jsonify(log_messages[-50:])
+@app.route('/')
+def home():
+    html = """
+    <h2>✅ Crypto Trading Bot is Running</h2>
+    <p><b>Mode:</b> Simulation</p>
+    <p><b>Cycle:</b> Every 1 hour</p>
+    <p><b>Tracked Coins:</b> BTC, ETH, SOL, XRP</p>
+    <br>
+    <a href="/status">🔍 Bot Status</a><br>
+    <a href="/prices">💰 Live Prices</a><br>
+    <a href="/log">📜 View Logs</a><br>
+    """
+    return html

@@ -99,3 +99,11 @@ def home():
     <a href="/log">📜 View Logs</a><br>
     """
     return html
+if __name__ == "__main__":
+    # Start scheduler thread
+    scheduler_thread = threading.Thread(target=start_scheduler)
+    scheduler_thread.daemon = True
+    scheduler_thread.start()
+
+    # Start Flask web server
+    app.run(host="0.0.0.0", port=10000)

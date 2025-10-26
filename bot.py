@@ -201,7 +201,18 @@ def home():
     <a href="/stop">🛑 Emergency STOP</a><br>
     """.format(mode=("LIVE" if LIVE_MODE and not SIMULATION_MODE else "Simulation"))
     return html
+    
+# ---- Coinbase API Test Route ----
+from trading.live_trader import client  # make sure client is imported
 
+@app.route('/api_test')
+def api_test():
+    try:
+        accounts = client.get_accounts()
+        return "✅ OK - Coinbase API Connected", 200
+    except Exception as e:
+        return f"❌ FAIL - {str(e)}", 500
+        
 # ---- Entrypoint ----
 @app.route('/test-coinbase')
 def test_coinbase():

@@ -18,8 +18,8 @@ TAKE_PROFIT = 0.10     # 10%
 DAILY_MAX_LOSS = 50    # Stop trading after $50 loss
 
 # Mode
-SIMULATION_MODE = False  # 🚨 LIVE TRADING ENABLED
-LIVE_MODE = True         # Real Coinbase trading
+LIVE_MODE = True
+SIMULATION_MODE = False       
 
 # Logging
 ENABLE_LOGS = True

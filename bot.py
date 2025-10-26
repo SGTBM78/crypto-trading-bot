@@ -48,7 +48,13 @@ def log(message):
             elif signal == "SELL":
                 if symbol in open_positions:
                     log(f"[{symbol}] 🔻 LIVE SELL triggered at {current_price}")
-                    place_sell(symbol, 1, current_price)
+                    # Close trade and track P/L
+result = place_sell(symbol, 1, current_price)
+if result:
+    global daily_loss
+    profit = current_price - open_positions.get(symbol, current_price)
+    daily_loss += profit
+    log(f"[{symbol}] 💰 Trade P/L: {profit:.2f} | Daily Loss: {daily_loss:.2f}")
                 else:
                     log(f"[{symbol}] No active position to sell")
 

@@ -11,11 +11,15 @@ RSI_LOWER = 35
 RSI_UPPER = 65
 
 # Risk Management
-STOP_LOSS = 0.05  # 5%
-TAKE_PROFIT = 0.10  # 10%
+RISK_PER_TRADE = 0.05  # 5% risk per trade
+MAX_TRADE_SIZE = 50    # Cap trade size to $50
+STOP_LOSS = 0.05       # 5%
+TAKE_PROFIT = 0.10     # 10%
+DAILY_MAX_LOSS = 50    # Stop trading after $50 loss
 
-# Trading Mode
-SIMULATION_MODE = True  # Real trading later
+# Mode
+SIMULATION_MODE = False  # 🚨 LIVE TRADING ENABLED
+LIVE_MODE = True         # Real Coinbase trading
 
 # Logging
 ENABLE_LOGS = True

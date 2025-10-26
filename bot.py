@@ -215,3 +215,8 @@ if __name__ == "__main__":
 
     # Start Flask
     app.run(host="0.0.0.0", port=10000)
+@app.route('/api_test')
+def api_test():
+    from trading.live_trader import test_connection
+    ok = test_connection()
+    return "OK" if ok else "FAIL"

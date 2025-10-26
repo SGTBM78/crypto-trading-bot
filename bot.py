@@ -30,7 +30,42 @@ def log(message):
     if ENABLE_LOGS:
         print(message)
         log_messages.append(message)
-def run_trading_cycle():
+# ---- LIVE TRADING ----
+        if LIVE_MODE:
+            if check_daily_limit():
+                log(f"[{symbol}] ⛔ Skipping trade — daily max loss reached")
+                return
+
+            # BUY logic
+            if signal == "BUY":
+                if symbol not in open_positions:
+                    log(f"[{symbol}] ✅ LIVE BUY triggered at {current_price}")
+                    place_buy(symbol, current_price)
+                else:
+                    log(f"[{symbol}] HOLD — already in a position")
+
+            # SELL logic
+            elif signal == "SELL":
+                if symbol in open_positions:
+                    log(f"[{symbol}] 🔻 LIVE SELL triggered at {current_price}")
+                    place_sell(symbol, 1, current_price)
+                else:
+                    log(f"[{symbol}] No active position to sell")
+
+            else:
+                log(f"[{symbol}] HOLD — no action")
+
+        # ---- SIMULATION FALLBACK ----
+        else:
+            # Simulation logic stays the same
+            if signal == "BUY":
+                if symbol not in open_positions:
+                    open_trade(symbol, current_price)
+                    log(f"[{symbol}] 🧪 SIM BUY at {current_price}")
+            elif signal == "SELL":
+                if symbol in open_positions:
+                    close_trade(symbol, current_price)
+                    log(f"[{symbol}] 🧪 SIM SELL at {current_price}"):
     log("🔄 Running trading cycle...")
 
     for symbol in TRACKED_COINS:

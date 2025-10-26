@@ -23,3 +23,9 @@ SIMULATION_MODE = False
 
 # Logging
 ENABLE_LOGS = True
+import os
+
+COINBASE_API_KEY = os.getenv("nMHcCAQEEICwc42YZwoCB3cU6akj85f+LBEK0G+L+aZmitS8ioXmcoAoGCCqGSM49\nAwEHoUQDQgAEx0jQO7hGl3WTjBBO4mbhUxyrypVEM3TtkIIB9esU8Dqcm3vsD6FY\nDW6TLYl5rS+Rq9tPMKgSW6QeIPLYIDtVdQ")
+COINBASE_API_SECRET = os.getenv("7291057e-baee-4185-bb2f-463e46441348/apiKeys/7238438d-fcab-4e68-9c0d-ba5b3b75b722")
+COINBASE_PASSPHRASE = os.getenv("trading-bot")
+COINBASE_API_URL = "https://api.exchange.coinbase.com"

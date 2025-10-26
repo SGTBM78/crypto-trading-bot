@@ -76,3 +76,17 @@ def test_connection():
             return f"❌ ERROR – Cannot connect: {response.text}"
     except Exception as e:
         return f"❌ EXCEPTION – {e}"
+def test_connection():
+    """Simple call to check Coinbase API authentication."""
+    client = get_client()
+    try:
+        accounts = client.get_accounts()
+        print("✅ Coinbase API connected — accounts retrieved.")
+        for acct in accounts.json():
+            if acct.get("currency") == "USD":
+                print("USD balance:", acct.get("available_balance", {}).get("value"))
+        return True
+    except Exception as e:
+        print("❌ Coinbase API test failed:", e)
+        send_email_alert(f"❌ Coinbase API test failed: {e}")
+        return False

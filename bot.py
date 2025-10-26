@@ -203,6 +203,10 @@ def home():
     return html
 
 # ---- Entrypoint ----
+@app.route('/test-coinbase')
+def test_coinbase():
+    from trading.live_trader import test_connection
+    return test_connection()
 if __name__ == "__main__":
     # Start scheduler thread
     scheduler_thread = threading.Thread(target=start_scheduler)

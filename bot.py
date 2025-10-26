@@ -107,3 +107,8 @@ if __name__ == "__main__":
 
     # Start Flask web server
     app.run(host="0.0.0.0", port=10000)
+# LIVE TRADING SUPPORT
+from config.settings import LIVE_MODE, DAILY_MAX_LOSS, RISK_PER_TRADE, MAX_TRADE_SIZE
+from trading.live_trader import place_buy, place_sell
+from trading.trade_manager import load_trade_log
+from utils.email_alerts import send_email_alert

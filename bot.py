@@ -3,6 +3,17 @@ import schedule
 import time
 import threading
 
+# Track daily P/L
+daily_loss = 0
+
+def check_daily_limit():
+    global daily_loss
+    if daily_loss <= -DAILY_MAX_LOSS:
+        log("⛔ DAILY LOSS LIMIT HIT — Trading paused")
+        send_email_alert("⛔ DAILY LOSS LIMIT HIT — Bot paused for safety")
+        return True
+    return False
+    
 # Import bot modules
 from config.settings import TRACKED_COINS, TIMEFRAME, ENABLE_LOGS, SIMULATION_MODE
 from data.price_feed import get_candles

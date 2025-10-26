@@ -54,3 +54,25 @@ def place_sell(symbol, size, price):
     except Exception as e:
         send_email_alert(f"SELL Error: {e}")
         return None
+# ---- Test connection ----
+def test_connection():
+    try:
+        timestamp = str(int(time.time()))
+        message = timestamp + 'GET' + '/accounts'
+        signature = base64.b64encode(hmac.new(COINBASE_API_SECRET.encode(), message.encode(), hashlib.sha256).digest())
+
+        headers = {
+            'CB-ACCESS-KEY': COINBASE_API_KEY,
+            'CB-ACCESS-SIGN': signature,
+            'CB-ACCESS-TIMESTAMP': timestamp,
+            'CB-VERSION': '2023-01-01'
+        }
+
+        response = requests.get(f"{COINBASE_API_URL}/accounts", headers=headers)
+
+        if response.status_code == 200:
+            return "✅ SUCCESS – Connected to Coinbase API"
+        else:
+            return f"❌ ERROR – Cannot connect: {response.text}"
+    except Exception as e:
+        return f"❌ EXCEPTION – {e}"

@@ -203,9 +203,8 @@ def home():
     return html
     
 # ---- Coinbase API Test Route ----
-"""
+
 from trading.live_trader import client  # make sure client is imported
-"""
 
 @app.route('/api_test')
 def api_test():
